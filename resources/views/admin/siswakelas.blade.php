@@ -6,7 +6,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Data Ambil Kelas</div>
-
+                @if($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            {{$errors->first()}}
+                        </div>
+                    @endif
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -32,41 +36,52 @@
                                     <tr>
                                         <td>{{ $siswa->id }}</td>
                                         <td>{{ $siswa->name }}</td>
-                                        <td>
+                                        @if(count($siswa->kelas) != 0)
+                                            <td>
+                                                    <table>
+                                                        @foreach($siswa->kelas as $kelas)
+                                                            <tr>
+                                                                <td>{{$kelas->matkul->name}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </table>
+                                              
+                                            </td>
+                                            <td>
+                                             
+                                                <table>
+                                                    @foreach($siswa->kelas as $kelas)
+                                                            <tr>
+                                                                <td>{{$kelas->dosen->name}}</td>
+                                                            </tr>
+                                                    @endforeach
+                                                </table>
+                                         
+                                            </td>
+                                            <td>
+                                               
                                                 <table>
                                                     @foreach($siswa->kelas as $kelas)
                                                         <tr>
-                                                            <td>{{$kelas->matkul->name}}</td>
+                                                            <td>{{$kelas->room}}</td>
                                                         </tr>
                                                     @endforeach
                                                 </table>
-                                          
-                                        </td>
+                                              
+                                            </td>
+                                        @else
+                                            <td colspan="3">Class are empty</td>
+                                        @endif
+
                                         <td>
-                                         
                                             <table>
                                                 @foreach($siswa->kelas as $kelas)
-                                                        <tr>
-                                                            <td>{{$kelas->dosen->name}}</td>
-                                                        </tr>
-                                                    
+                                                <tr>
+                                                    <td><a href="siswakelas/edit/{{ $siswa->id }}/kelas/{{ $kelas->id }}">Edit</a> | <a href="siswakelas/delete/{{ $siswa->id }}/kelas/{{ $kelas->id }}">Delete</a></td>
+                                                </tr>
                                                 @endforeach
                                             </table>
-                                     
                                         </td>
-                                        <td>
-                                           
-                                            <table>
-                                                @foreach($siswa->kelas as $kelas)
-                                                    <tr>
-                                                        <td>{{$kelas->room}}</td>
-                                                    </tr>
-                                                    
-                                                @endforeach
-                                            </table>
-                                          
-                                        </td>
-                                        <td><a href="siswakelas/edit/{{ $siswa->id }}">Edit</a> | <a href="siswakelas/delete/{{ $siswa->id }}">Delete</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

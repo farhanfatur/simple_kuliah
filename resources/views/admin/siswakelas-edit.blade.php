@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Take class</div>
+                <div class="card-header">Edit class</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('storeSiswaKelas') }}">
+                    <form method="POST" action="{{ route('updateSiswaKelas') }}">
                         @csrf
-                        <h3>Create your Class</h3>
+                        <h3>Edit your Class</h3>
                         @if($errors->any())
                             <div class="alert alert-danger" role="alert">
                                 {{$errors->first()}}
@@ -20,18 +20,18 @@
                             <div class="col-md-6">
                                 <label>Name Student</label>
                                 <select class="form-control" name="idstudent" required>
-                                    <option value="">Choose your name</option>
-                                    @foreach($siswaes as $data)
-                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
-                                    @endforeach
+                                    <option value="{{ $siswa->id }}">{{ $siswa->name }}</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label>Class</label>
                                 <select class="form-control" name="idclass" required>
-                                    <option value="">Choose your Class</option>
-                                    @foreach($kelas as $data)
-                                        <option value="{{ $data->id }}">{{ $data->room }} - {{ $data->matkul->name }} - {{ $data->dosen->name }}</option>
+                                    @foreach($kelases as $data)
+                                            @if($data->id == $kelas->id)
+                                                <option value="{{ $data->id }}" selected>{{ $data->room }} - {{ $data->matkul->name }} - {{ $data->dosen->name }}</option>
+                                            @else
+                                                <option value="{{ $data->id }}">{{ $data->room }} - {{ $data->matkul->name }} - {{ $data->dosen->name }}</option>
+                                            @endif
                                     @endforeach
                                 </select>
                             </div>

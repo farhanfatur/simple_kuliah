@@ -68,4 +68,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('/siswakelas', 'admin\SiswaKelasController@index')->name('indexSiswaKelas');
 	Route::get('/siswakelas/add', 'admin\SiswaKelasController@add')->name('addSiswaKelas');
 	Route::post('/siswakelas/store', 'admin\SiswaKelasController@store')->name('storeSiswaKelas');
+	Route::get('/siswakelas/edit/{id}/kelas/{idKelas}', 'admin\SiswaKelasController@edit');
+	Route::get('/siswakelas/delete/{id}/kelas/{idKelas}', 'admin\SiswaKelasController@delete');
+	Route::post('/siswakelas/update', 'admin\SiswaKelasController@update')->name('updateSiswaKelas');
 });

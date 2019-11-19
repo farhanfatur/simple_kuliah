@@ -12,6 +12,6 @@ class Siswa extends Model
 
     public function kelas()
     {
-    	return $this->belongsToMany('App\Model\Kelas');
+    	return $this->belongsToMany('App\Model\Kelas')->withTimestamps();
     }
 }
